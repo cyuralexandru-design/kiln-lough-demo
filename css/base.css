@@ -1,0 +1,34 @@
+/* BASE — reset, typography, a11y. Rarely edited. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:calc(var(--header-h) + 1rem)}
+@media (prefers-reduced-motion: no-preference){ html:not(.lenis){scroll-behavior:smooth} }
+body{margin:0; background:var(--bg); color:var(--fg);
+  font:400 var(--step-0)/1.65 var(--font-body); text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased}
+img,svg,video{display:block; max-width:100%; height:auto}
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; margin:0; text-wrap:balance}
+h1{font-size:var(--display); line-height:.92; letter-spacing:-.035em}
+h2{font-size:var(--step-5); line-height:1.02; letter-spacing:-.025em}
+h3{font-size:var(--step-2); line-height:1.15; letter-spacing:-.01em}
+p{margin:0 0 1em; max-width:62ch; text-wrap:pretty}
+a{color:inherit; text-underline-offset:.18em; text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+
+.skip{position:absolute; left:-9999px; top:0; z-index:200; background:var(--fg); color:var(--bg); padding:.75rem 1rem}
+.skip:focus{left:1rem; top:1rem}
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+.container{width:min(100% - 2*var(--gutter), var(--max)); margin-inline:auto}
+.grid{display:grid; grid-template-columns:repeat(12,1fr); gap:var(--gutter)}
+@media (max-width:768px){ .grid{grid-template-columns:repeat(4,1fr)} }
+.section{padding-block:var(--section)}
+.lede{font-size:var(--step-1); line-height:1.5; color:var(--muted)}
+
+/* Motion guards: hide only when JS runs AND motion is allowed.
+   main.js removes .js if GSAP failed to load, so content never stays hidden. */
+@media (prefers-reduced-motion: no-preference){
+  .js [data-reveal]{opacity:0; transform:translateY(32px)}
+  .js [data-split]{visibility:hidden}
+}
